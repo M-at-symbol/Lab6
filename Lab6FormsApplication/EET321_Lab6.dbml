@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EET321_Lab6_S16" Class="EET321_Lab6DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=iet2;Initial Catalog=EET321_Lab6_S16;User ID=EET321" SettingsObjectName="Lab6FormsApplication.Properties.Settings" SettingsPropertyName="EET321_Lab6_S16ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.EET321_Lab6_Table" Member="EET321_Lab6_Tables">
+    <Type Name="EET321_Lab6_Table">
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="GroupID" Type="System.Char" DbType="NChar(1) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BoardID" Type="System.String" DbType="NChar(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Resistance" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="OnTime" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="Capacitance" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="MeasMinOnTime" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="MeasMaxOnTime" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="MeasMinResistance" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="MeasMaxResistance" Type="System.Single" DbType="Real" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
