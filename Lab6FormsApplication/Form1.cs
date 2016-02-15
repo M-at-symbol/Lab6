@@ -149,17 +149,17 @@ namespace Lab6FormsApplication
             char groupId = Convert.ToChar(textBox1.Text);
 
             var res = new EET321_Lab6DataContext();
-            var data = new Table2();
+            var data = new Table_2();
 
             data.GroupID = groupId;
             data.BoardID = boardId;
             data.DateTime = DateTime.Now;
-            data.MeasMaxOnTime = Convert.ToSingle(textBox6.Text);
-            data.MeasMinOnTime = Convert.ToSingle(textBox4.Text);
-            data.MeasureMaxResistance = Convert.ToSingle(textBox5.Text);
-            data.MeasureMinResistance = Convert.ToSingle(textBox3.Text);
+            data.MaxOnTime = Convert.ToSingle(textBox6.Text);
+            data.MinOnTime = Convert.ToSingle(textBox4.Text);
+            data.MaxTimeResistance = Convert.ToSingle(textBox5.Text);
+            data.MinTimeResistance = Convert.ToSingle(textBox3.Text);
            
-            res.Table2s.InsertOnSubmit(data);
+            res.Table_2s.InsertOnSubmit(data);
             res.SubmitChanges(); //submit changes
             System.Windows.Forms.MessageBox.Show("Upload complete!");
         }
@@ -344,7 +344,15 @@ namespace Lab6FormsApplication
                 yinc = this.getYInc();
             }
             this.isDone();
-            var yor = this.getYor();
+            var yor = 0F;
+            try
+            {
+                yor = this.getYor();
+            }
+            catch
+            {
+                yor = this.getYor();
+            }
             this.isDone();
             var data = data_int.Select((d) => (125 - d) * yinc - yor).ToArray();
             return data;

@@ -2,22 +2,22 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="EET321_Lab6">
   <DataContextMoniker Name="/EET321_Lab6DataContext" />
   <nestedChildShapes>
-    <classShape Id="4fbeb3fd-c8e1-4056-aebc-91222271b948" absoluteBounds="1.625, 1.25, 2, 1.9631982421875">
+    <classShape Id="25300c61-7c6f-4962-8fbb-6eed7525608e" absoluteBounds="4, 3.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/EET321_Lab6DataContext/Table_2" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7f58d479-2066-4ba3-a1d9-c74cc69e7fc4" absoluteBounds="4.015, 4.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a0e10651-c7bc-4c9b-9f43-4e87435c5913" absoluteBounds="4.625, 1, 2, 1.9631982421875">
       <DataClassMoniker Name="/EET321_Lab6DataContext/Table_1" />
       <nestedChildShapes>
-        <elementListCompartment Id="fb7154fd-af17-483c-b1da-0b4a67a344a7" absoluteBounds="1.6400000000000001, 1.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="751cb4bd-8220-4483-bfac-3bf1e52421bd" absoluteBounds="4.6400000000000006, 1.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="9b78af08-214c-4ede-b2d9-31c4261897f9" absoluteBounds="3.875, 1.25, 2, 1.5785953776041666">
+    <classShape Id="176e43bd-2795-43b0-8cba-507a0a27dc90" absoluteBounds="2.125, 1.375, 2, 1.5785953776041666">
       <DataClassMoniker Name="/EET321_Lab6DataContext/Table_Resistance" />
       <nestedChildShapes>
-        <elementListCompartment Id="cdf96b4d-1c0c-4bd4-b920-52210e84ce0b" absoluteBounds="3.8899999999999997, 1.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="6a22f83b-9d21-4d2f-9296-caf6c20f7bee" absoluteBounds="6, 1.25, 2, 2.1554996744791666">
-      <DataClassMoniker Name="/EET321_Lab6DataContext/Table2" />
-      <nestedChildShapes>
-        <elementListCompartment Id="b8a3c6a0-c253-4ebb-b439-a3397bfd07f5" absoluteBounds="6.015, 1.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ceb8f24a-2e31-4613-b010-0ad24409733d" absoluteBounds="2.14, 1.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

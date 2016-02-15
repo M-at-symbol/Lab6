@@ -164,14 +164,14 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(457, 58);
+            this.textBox3.Location = new System.Drawing.Point(440, 58);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 9;
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(457, 97);
+            this.textBox4.Location = new System.Drawing.Point(440, 97);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(100, 20);
             this.textBox4.TabIndex = 10;
@@ -193,16 +193,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(454, 40);
+            this.label4.Location = new System.Drawing.Point(437, 40);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 13);
+            this.label4.Size = new System.Drawing.Size(114, 13);
             this.label4.TabIndex = 13;
-            this.label4.Text = "MinResistance";
+            this.label4.Text = "MinOnTimeResistance";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(454, 81);
+            this.label5.Location = new System.Drawing.Point(437, 81);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 13);
             this.label5.TabIndex = 14;
@@ -213,9 +213,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(560, 37);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 13);
+            this.label6.Size = new System.Drawing.Size(117, 13);
             this.label6.TabIndex = 15;
-            this.label6.Text = "MaxResistance";
+            this.label6.Text = "MaxOnTimeResistance";
             // 
             // label7
             // 

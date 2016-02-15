@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EET321_Lab6_S16" Class="EET321_Lab6DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=iet2;Initial Catalog=EET321_Lab6_S16;User ID=EET321" SettingsObjectName="Lab6FormsApplication.Properties.Settings" SettingsPropertyName="EET321_Lab6_S16ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Table_2" Member="Table_2s">
+    <Type Name="Table_2">
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="GroupID" Type="System.Char" DbType="NChar(1) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BoardID" Type="System.String" DbType="NChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="MinOnTime" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="MaxOnTime" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="MinTimeResistance" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="MaxTimeResistance" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.Table_1" Member="Table_1s">
     <Type Name="Table_1">
       <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -16,17 +27,6 @@
       <Column Name="GroupID" Type="System.Char" DbType="NChar(1) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="BoardID" Type="System.String" DbType="NChar(3) NOT NULL" CanBeNull="false" />
       <Column Name="Resistance" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Table2" Member="Table2s">
-    <Type Name="Table2">
-      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="GroupID" Type="System.Char" DbType="NChar(1)" CanBeNull="true" />
-      <Column Name="BoardID" Type="System.String" DbType="NChar(3) NOT NULL" CanBeNull="false" />
-      <Column Name="MeasMinOnTime" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
-      <Column Name="MeasMaxOnTime" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
-      <Column Name="MeasureMinResistance" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
-      <Column Name="MeasureMaxResistance" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>
