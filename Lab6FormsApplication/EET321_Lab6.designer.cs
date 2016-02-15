@@ -30,9 +30,12 @@ namespace Lab6FormsApplication
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertEET321_Lab6_Table(EET321_Lab6_Table instance);
-    partial void UpdateEET321_Lab6_Table(EET321_Lab6_Table instance);
-    partial void DeleteEET321_Lab6_Table(EET321_Lab6_Table instance);
+    partial void InsertTable_1(Table_1 instance);
+    partial void UpdateTable_1(Table_1 instance);
+    partial void DeleteTable_1(Table_1 instance);
+    partial void InsertTable_Resistance(Table_Resistance instance);
+    partial void UpdateTable_Resistance(Table_Resistance instance);
+    partial void DeleteTable_Resistance(Table_Resistance instance);
     #endregion
 		
 		public EET321_Lab6DataContext() : 
@@ -65,17 +68,33 @@ namespace Lab6FormsApplication
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<EET321_Lab6_Table> EET321_Lab6_Tables
+		public System.Data.Linq.Table<Table_1> Table_1s
 		{
 			get
 			{
-				return this.GetTable<EET321_Lab6_Table>();
+				return this.GetTable<Table_1>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Table_Resistance> Table_Resistances
+		{
+			get
+			{
+				return this.GetTable<Table_Resistance>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Table2> Table2s
+		{
+			get
+			{
+				return this.GetTable<Table2>();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EET321_Lab6_Table")]
-	public partial class EET321_Lab6_Table : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Table_1")]
+	public partial class Table_1 : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -86,19 +105,11 @@ namespace Lab6FormsApplication
 		
 		private string _BoardID;
 		
-		private float _Resistance;
-		
-		private float _OnTime;
+		private int _Step;
 		
 		private System.Nullable<float> _Capacitance;
 		
-		private System.Nullable<float> _MeasMinOnTime;
-		
-		private System.Nullable<float> _MeasMaxOnTime;
-		
-		private System.Nullable<float> _MeasMinResistance;
-		
-		private System.Nullable<float> _MeasMaxResistance;
+		private float _OnTime;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -110,23 +121,15 @@ namespace Lab6FormsApplication
     partial void OnGroupIDChanged();
     partial void OnBoardIDChanging(string value);
     partial void OnBoardIDChanged();
-    partial void OnResistanceChanging(float value);
-    partial void OnResistanceChanged();
-    partial void OnOnTimeChanging(float value);
-    partial void OnOnTimeChanged();
+    partial void OnStepChanging(int value);
+    partial void OnStepChanged();
     partial void OnCapacitanceChanging(System.Nullable<float> value);
     partial void OnCapacitanceChanged();
-    partial void OnMeasMinOnTimeChanging(System.Nullable<float> value);
-    partial void OnMeasMinOnTimeChanged();
-    partial void OnMeasMaxOnTimeChanging(System.Nullable<float> value);
-    partial void OnMeasMaxOnTimeChanged();
-    partial void OnMeasMinResistanceChanging(System.Nullable<float> value);
-    partial void OnMeasMinResistanceChanged();
-    partial void OnMeasMaxResistanceChanging(System.Nullable<float> value);
-    partial void OnMeasMaxResistanceChanged();
+    partial void OnOnTimeChanging(float value);
+    partial void OnOnTimeChanged();
     #endregion
 		
-		public EET321_Lab6_Table()
+		public Table_1()
 		{
 			OnCreated();
 		}
@@ -171,7 +174,7 @@ namespace Lab6FormsApplication
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BoardID", DbType="NChar(3) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BoardID", DbType="NChar(3) NOT NULL", CanBeNull=false)]
 		public string BoardID
 		{
 			get
@@ -191,42 +194,22 @@ namespace Lab6FormsApplication
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Resistance", DbType="Real NOT NULL")]
-		public float Resistance
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Step", DbType="Int NOT NULL")]
+		public int Step
 		{
 			get
 			{
-				return this._Resistance;
+				return this._Step;
 			}
 			set
 			{
-				if ((this._Resistance != value))
+				if ((this._Step != value))
 				{
-					this.OnResistanceChanging(value);
+					this.OnStepChanging(value);
 					this.SendPropertyChanging();
-					this._Resistance = value;
-					this.SendPropertyChanged("Resistance");
-					this.OnResistanceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OnTime", DbType="Real NOT NULL")]
-		public float OnTime
-		{
-			get
-			{
-				return this._OnTime;
-			}
-			set
-			{
-				if ((this._OnTime != value))
-				{
-					this.OnOnTimeChanging(value);
-					this.SendPropertyChanging();
-					this._OnTime = value;
-					this.SendPropertyChanged("OnTime");
-					this.OnOnTimeChanged();
+					this._Step = value;
+					this.SendPropertyChanged("Step");
+					this.OnStepChanged();
 				}
 			}
 		}
@@ -251,82 +234,22 @@ namespace Lab6FormsApplication
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MeasMinOnTime", DbType="Real")]
-		public System.Nullable<float> MeasMinOnTime
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OnTime", DbType="Real NOT NULL")]
+		public float OnTime
 		{
 			get
 			{
-				return this._MeasMinOnTime;
+				return this._OnTime;
 			}
 			set
 			{
-				if ((this._MeasMinOnTime != value))
+				if ((this._OnTime != value))
 				{
-					this.OnMeasMinOnTimeChanging(value);
+					this.OnOnTimeChanging(value);
 					this.SendPropertyChanging();
-					this._MeasMinOnTime = value;
-					this.SendPropertyChanged("MeasMinOnTime");
-					this.OnMeasMinOnTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MeasMaxOnTime", DbType="Real")]
-		public System.Nullable<float> MeasMaxOnTime
-		{
-			get
-			{
-				return this._MeasMaxOnTime;
-			}
-			set
-			{
-				if ((this._MeasMaxOnTime != value))
-				{
-					this.OnMeasMaxOnTimeChanging(value);
-					this.SendPropertyChanging();
-					this._MeasMaxOnTime = value;
-					this.SendPropertyChanged("MeasMaxOnTime");
-					this.OnMeasMaxOnTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MeasMinResistance", DbType="Real")]
-		public System.Nullable<float> MeasMinResistance
-		{
-			get
-			{
-				return this._MeasMinResistance;
-			}
-			set
-			{
-				if ((this._MeasMinResistance != value))
-				{
-					this.OnMeasMinResistanceChanging(value);
-					this.SendPropertyChanging();
-					this._MeasMinResistance = value;
-					this.SendPropertyChanged("MeasMinResistance");
-					this.OnMeasMinResistanceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MeasMaxResistance", DbType="Real")]
-		public System.Nullable<float> MeasMaxResistance
-		{
-			get
-			{
-				return this._MeasMaxResistance;
-			}
-			set
-			{
-				if ((this._MeasMaxResistance != value))
-				{
-					this.OnMeasMaxResistanceChanging(value);
-					this.SendPropertyChanging();
-					this._MeasMaxResistance = value;
-					this.SendPropertyChanged("MeasMaxResistance");
-					this.OnMeasMaxResistanceChanged();
+					this._OnTime = value;
+					this.SendPropertyChanged("OnTime");
+					this.OnOnTimeChanged();
 				}
 			}
 		}
@@ -348,6 +271,275 @@ namespace Lab6FormsApplication
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Table_Resistance")]
+	public partial class Table_Resistance : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.DateTime _DateTime;
+		
+		private char _GroupID;
+		
+		private string _BoardID;
+		
+		private double _Resistance;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDateTimeChanging(System.DateTime value);
+    partial void OnDateTimeChanged();
+    partial void OnGroupIDChanging(char value);
+    partial void OnGroupIDChanged();
+    partial void OnBoardIDChanging(string value);
+    partial void OnBoardIDChanged();
+    partial void OnResistanceChanging(double value);
+    partial void OnResistanceChanged();
+    #endregion
+		
+		public Table_Resistance()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateTime", DbType="DateTime NOT NULL", IsPrimaryKey=true)]
+		public System.DateTime DateTime
+		{
+			get
+			{
+				return this._DateTime;
+			}
+			set
+			{
+				if ((this._DateTime != value))
+				{
+					this.OnDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._DateTime = value;
+					this.SendPropertyChanged("DateTime");
+					this.OnDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupID", DbType="NChar(1) NOT NULL", IsPrimaryKey=true)]
+		public char GroupID
+		{
+			get
+			{
+				return this._GroupID;
+			}
+			set
+			{
+				if ((this._GroupID != value))
+				{
+					this.OnGroupIDChanging(value);
+					this.SendPropertyChanging();
+					this._GroupID = value;
+					this.SendPropertyChanged("GroupID");
+					this.OnGroupIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BoardID", DbType="NChar(3) NOT NULL", CanBeNull=false)]
+		public string BoardID
+		{
+			get
+			{
+				return this._BoardID;
+			}
+			set
+			{
+				if ((this._BoardID != value))
+				{
+					this.OnBoardIDChanging(value);
+					this.SendPropertyChanging();
+					this._BoardID = value;
+					this.SendPropertyChanged("BoardID");
+					this.OnBoardIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Resistance", DbType="Float NOT NULL")]
+		public double Resistance
+		{
+			get
+			{
+				return this._Resistance;
+			}
+			set
+			{
+				if ((this._Resistance != value))
+				{
+					this.OnResistanceChanging(value);
+					this.SendPropertyChanging();
+					this._Resistance = value;
+					this.SendPropertyChanged("Resistance");
+					this.OnResistanceChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Table2")]
+	public partial class Table2
+	{
+		
+		private System.DateTime _DateTime;
+		
+		private System.Nullable<char> _GroupID;
+		
+		private string _BoardID;
+		
+		private float _MeasMinOnTime;
+		
+		private float _MeasMaxOnTime;
+		
+		private float _MeasureMinResistance;
+		
+		private float _MeasureMaxResistance;
+		
+		public Table2()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime DateTime
+		{
+			get
+			{
+				return this._DateTime;
+			}
+			set
+			{
+				if ((this._DateTime != value))
+				{
+					this._DateTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupID", DbType="NChar(1)")]
+		public System.Nullable<char> GroupID
+		{
+			get
+			{
+				return this._GroupID;
+			}
+			set
+			{
+				if ((this._GroupID != value))
+				{
+					this._GroupID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BoardID", DbType="NChar(3) NOT NULL", CanBeNull=false)]
+		public string BoardID
+		{
+			get
+			{
+				return this._BoardID;
+			}
+			set
+			{
+				if ((this._BoardID != value))
+				{
+					this._BoardID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MeasMinOnTime", DbType="Real NOT NULL")]
+		public float MeasMinOnTime
+		{
+			get
+			{
+				return this._MeasMinOnTime;
+			}
+			set
+			{
+				if ((this._MeasMinOnTime != value))
+				{
+					this._MeasMinOnTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MeasMaxOnTime", DbType="Real NOT NULL")]
+		public float MeasMaxOnTime
+		{
+			get
+			{
+				return this._MeasMaxOnTime;
+			}
+			set
+			{
+				if ((this._MeasMaxOnTime != value))
+				{
+					this._MeasMaxOnTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MeasureMinResistance", DbType="Real NOT NULL")]
+		public float MeasureMinResistance
+		{
+			get
+			{
+				return this._MeasureMinResistance;
+			}
+			set
+			{
+				if ((this._MeasureMinResistance != value))
+				{
+					this._MeasureMinResistance = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MeasureMaxResistance", DbType="Real NOT NULL")]
+		public float MeasureMaxResistance
+		{
+			get
+			{
+				return this._MeasureMaxResistance;
+			}
+			set
+			{
+				if ((this._MeasureMaxResistance != value))
+				{
+					this._MeasureMaxResistance = value;
+				}
 			}
 		}
 	}

@@ -37,7 +37,7 @@
       <HintPath>C:\Program Files (x86)\National Instruments\MeasurementStudioVS2010\DotNET\Assemblies\Current\NationalInstruments.Common.dll</HintPath>
     </Reference>
     <Reference Include="NationalInstruments.NI4882">
-      <HintPath>E:\MET311\SerialGPIB\NationalInstruments.NI4882\v4.0_13.0.40.159__dc6ad606294fc298\NationalInstruments.NI4882.dll</HintPath>
+      <HintPath>..\NationalInstruments.NI4882.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

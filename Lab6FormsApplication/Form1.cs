@@ -16,7 +16,6 @@ namespace Lab6FormsApplication
     public partial class Form1 : Form
     {
         DMM dmm1 = new DMM(1);
-        DMM dmm2 = new DMM(3);
         DSO dso = new DSO(2);            //declares dso from dso class
         List<float> dsodata;            //declares float list
         NI.Device device;
@@ -28,20 +27,32 @@ namespace Lab6FormsApplication
             for (int i = 0; i < 100; i++)
             {
                 this.dataGridView1.Rows.Add(); //create table in the form
-            }   
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                this.dataGridView2.Rows.Add(); //create table in the form
+            }
         }
 
         private void incButton_Click(object sender, EventArgs e)
         {
 
             for (int i = 0; i < 100; i++){
-                this.dataGridView1.Rows[i].Cells[1].Value = getTime();
-                //this.dataGridView1.Rows[i].Cells[0].Value = dmm2Res[i];//place resistance on chart
+                this.dataGridView2.Rows[i].Cells[0].Value = dmm1.measureResistance();//place resistance on chart
                 serialPort2.WriteLine("i");
                 Thread.Sleep(500); 
              }
         }
 
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                this.dataGridView1.Rows[i].Cells[1].Value = getTime();
+                serialPort2.WriteLine("i");
+                Thread.Sleep(500);
+            }
+        }
         private float getTime()
         {
             dso.clearOffset();
@@ -73,37 +84,86 @@ namespace Lab6FormsApplication
         private void button1_Click(object sender, EventArgs e)
         {
             serialPort2.WriteLine("d");
+            System.Windows.Forms.MessageBox.Show("Resitor Reseting!");
+            Thread.Sleep(12000); 
         }
 
         private void uploadButton_Click(object sender, EventArgs e)
         {
-            var boardId = textBox1.Text;
-            char groupId = Convert.ToChar(textBox2.Text);
+            var boardId = textBox2.Text;
+            char groupId = Convert.ToChar(textBox1.Text);
             var cap = getCap();
             /* Grab data from spreadsheet and place in lists */
             for (int i = 0; i < 100; i++)
             {
 
-                var resistance = Convert.ToSingle(dataGridView1.Rows[i].Cells[0].Value);
                 var onTime = Convert.ToSingle(dataGridView1.Rows[i].Cells[1].Value);
 
                 var res = new EET321_Lab6DataContext();
-                var data = new EET321_Lab6_Table();
+                var data = new Table_1();
+
+
+                data.GroupID = groupId;
+                data.BoardID = boardId;
+                data.DateTime = DateTime.Now;
+                data.OnTime = onTime;
+                data.Step = i;
+                data.Capacitance = cap;
+
+                res.Table_1s.InsertOnSubmit(data);//insert data to server
+                res.SubmitChanges(); //submit changes
+                
+            }
+            System.Windows.Forms.MessageBox.Show("Upload complete!");
+        }
+
+        private void uploadResistanceButton_Click(object sender, EventArgs e)
+        {
+            var boardId = textBox2.Text;
+            char groupId = Convert.ToChar(textBox1.Text);
+
+                        /* Grab data from spreadsheet and place in lists */
+            for (int i = 0; i < 100; i++)
+            {
+
+                var resistance = Convert.ToSingle(dataGridView2.Rows[i].Cells[0].Value);
+
+                var res = new EET321_Lab6DataContext();
+                var data = new Table_Resistance();
 
 
                 data.GroupID = groupId;
                 data.BoardID = boardId;
                 data.DateTime = DateTime.Now;
                 data.Resistance = resistance;
-                data.OnTime = onTime;
-                data.Capacitance = cap;
 
-                res.EET321_Lab6_Tables.InsertOnSubmit(data);//insert data to server
+                res.Table_Resistances.InsertOnSubmit(data);
                 res.SubmitChanges(); //submit changes
+                
             }
-
-       
+            System.Windows.Forms.MessageBox.Show("Upload complete!");
         }
+        private void uploadManual_Click(object sender, EventArgs e)
+        {
+            var boardId = textBox2.Text;
+            char groupId = Convert.ToChar(textBox1.Text);
+
+            var res = new EET321_Lab6DataContext();
+            var data = new Table2();
+
+            data.GroupID = groupId;
+            data.BoardID = boardId;
+            data.DateTime = DateTime.Now;
+            data.MeasMaxOnTime = Convert.ToSingle(textBox6.Text);
+            data.MeasMinOnTime = Convert.ToSingle(textBox4.Text);
+            data.MeasureMaxResistance = Convert.ToSingle(textBox5.Text);
+            data.MeasureMinResistance = Convert.ToSingle(textBox3.Text);
+           
+            res.Table2s.InsertOnSubmit(data);
+            res.SubmitChanges(); //submit changes
+            System.Windows.Forms.MessageBox.Show("Upload complete!");
+        }
+
 
         private float getCap()
         {
@@ -130,13 +190,8 @@ namespace Lab6FormsApplication
             return capacitance;
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
 
-        }
     }
-
- 
 }
 
     /* Thanks Jonny */
@@ -153,43 +208,6 @@ namespace Lab6FormsApplication
         public double measureResistance()
         {
             device.Write("MEAS:RES?"); 
-            var str = device.ReadString(); //reads value from DMM
-            double d = 0.0;
-
-            /* If it cannot parse the str then try and measure again */
-            try
-            {
-                d = double.Parse(str);
-            }
-            catch
-            {
-                //weird error look at dmm
-                d = this.measureResistance();
-            }
-            return d;
-        }
-        public double measureVolt()
-        {
-            device.Write("MEAS:VOLT:AC?");
-            var str = device.ReadString(); //reads value from DMM
-            double d = 0.0;
-
-            /* If it cannot parse the str then try and measure again */
-            try
-            {
-                d = double.Parse(str);
-            }
-            catch
-            {
-                //weird error look at dmm
-                d = this.measureResistance();
-            }
-            return d;
-        }
-
-        public double measureCurrent()
-        {
-            device.Write("MEAS:CURR?");
             var str = device.ReadString(); //reads value from DMM
             double d = 0.0;
 

@@ -33,7 +33,7 @@
             this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Resistance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Step = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OnTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.capValue = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,17 +50,22 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.uploadButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.uploadManual = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Reistance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uploadResistanceButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // incButton
             // 
-            this.incButton.Location = new System.Drawing.Point(44, 29);
+            this.incButton.Location = new System.Drawing.Point(335, 161);
             this.incButton.Name = "incButton";
             this.incButton.Size = new System.Drawing.Size(75, 23);
             this.incButton.TabIndex = 0;
-            this.incButton.Text = "Start";
+            this.incButton.Text = "Resitance";
             this.incButton.UseVisualStyleBackColor = true;
             this.incButton.Click += new System.EventHandler(this.incButton_Click);
             // 
@@ -71,11 +76,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(44, 58);
+            this.button1.Location = new System.Drawing.Point(12, 58);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(107, 23);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Reset";
+            this.button1.Text = "Reset Resistor";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -83,17 +88,17 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Resistance,
+            this.Step,
             this.OnTime});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 157);
+            this.dataGridView1.Location = new System.Drawing.Point(457, 161);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(671, 274);
+            this.dataGridView1.Size = new System.Drawing.Size(301, 274);
             this.dataGridView1.TabIndex = 2;
             // 
-            // Resistance
+            // Step
             // 
-            this.Resistance.HeaderText = "Resistance";
-            this.Resistance.Name = "Resistance";
+            this.Step.HeaderText = "Step";
+            this.Step.Name = "Step";
             // 
             // OnTime
             // 
@@ -223,28 +228,66 @@
             // 
             // uploadButton
             // 
-            this.uploadButton.Location = new System.Drawing.Point(843, 447);
+            this.uploadButton.Location = new System.Drawing.Point(772, 214);
             this.uploadButton.Name = "uploadButton";
-            this.uploadButton.Size = new System.Drawing.Size(75, 23);
+            this.uploadButton.Size = new System.Drawing.Size(101, 23);
             this.uploadButton.TabIndex = 17;
-            this.uploadButton.Text = "Upload";
+            this.uploadButton.Text = "Upload On Time";
             this.uploadButton.UseVisualStyleBackColor = true;
             this.uploadButton.Click += new System.EventHandler(this.uploadButton_Click);
             // 
-            // button2
+            // uploadManual
             // 
-            this.button2.Location = new System.Drawing.Point(679, 54);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(168, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "Upload Manaul Data";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.uploadManual.Location = new System.Drawing.Point(679, 54);
+            this.uploadManual.Name = "uploadManual";
+            this.uploadManual.Size = new System.Drawing.Size(168, 23);
+            this.uploadManual.TabIndex = 18;
+            this.uploadManual.Text = "Upload Manaul Data";
+            this.uploadManual.UseVisualStyleBackColor = true;
+            this.uploadManual.Click += new System.EventHandler(this.uploadManual_Click);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Reistance});
+            this.dataGridView2.Location = new System.Drawing.Point(44, 161);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(285, 274);
+            this.dataGridView2.TabIndex = 19;
+            // 
+            // Reistance
+            // 
+            this.Reistance.HeaderText = "Resistance";
+            this.Reistance.Name = "Reistance";
+            // 
+            // uploadResistanceButton
+            // 
+            this.uploadResistanceButton.Location = new System.Drawing.Point(335, 214);
+            this.uploadResistanceButton.Name = "uploadResistanceButton";
+            this.uploadResistanceButton.Size = new System.Drawing.Size(116, 23);
+            this.uploadResistanceButton.TabIndex = 20;
+            this.uploadResistanceButton.Text = "Upload Resistance";
+            this.uploadResistanceButton.UseVisualStyleBackColor = true;
+            this.uploadResistanceButton.Click += new System.EventHandler(this.uploadResistanceButton_Click);
+            // 
+            // startButton
+            // 
+            this.startButton.Location = new System.Drawing.Point(772, 161);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(75, 23);
+            this.startButton.TabIndex = 21;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(930, 482);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.uploadResistanceButton);
+            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.uploadManual);
             this.Controls.Add(this.uploadButton);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -267,6 +310,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,10 +337,14 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Resistance;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OnTime;
         private System.Windows.Forms.Button uploadButton;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button uploadManual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Step;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OnTime;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reistance;
+        private System.Windows.Forms.Button uploadResistanceButton;
+        private System.Windows.Forms.Button startButton;
     }
 }
 
