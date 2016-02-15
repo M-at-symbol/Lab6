@@ -33,16 +33,10 @@ namespace Lab6FormsApplication
 
         private void incButton_Click(object sender, EventArgs e)
         {
-            List<double> dmm2Res = new List<double>();
-            List<double> dmmVolt = new List<double>();
-            List<double> dmmCurrent = new List<double>();
 
             for (int i = 0; i < 100; i++){
                 this.dataGridView1.Rows[i].Cells[1].Value = getTime();
-                dmmVolt.Add(dmm1.measureVolt());
-                dmmCurrent.Add(dmm2.measureCurrent()); //measure again so we get the most recent current
-                dmm2Res.Add(dmmVolt[i] / dmmCurrent[i]);//calculate resistance by dividing dmmVolt by dmmCurrent
-                this.dataGridView1.Rows[i].Cells[0].Value = dmm2Res[i];//place resistance on chart
+                //this.dataGridView1.Rows[i].Cells[0].Value = dmm2Res[i];//place resistance on chart
                 serialPort2.WriteLine("i");
                 Thread.Sleep(500); 
              }
@@ -54,9 +48,10 @@ namespace Lab6FormsApplication
             dso.setTimeScale(1.0f / (500.0f));
             dso.setScale(20.0F);
             dso.setTrigerSlopePos();
+            dso.setTrigerLevel(-0.3F);
             dso.setCoupling(DSO.Coupling.DC);
             dso.clearMeasure();
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             var data = dso.getdata();
             data = data.Skip(data.Length / 2).ToArray();
             var xinc = dso.getXInc();
@@ -323,8 +318,13 @@ namespace Lab6FormsApplication
 
             string[] data_str = DATA.Split();
             var data_int = data_str.Select((s) => Convert.ToInt32(s, 16)).ToArray();
-
-            var yinc = this.getYInc();
+            var yinc = 0F;
+            try
+            {
+                yinc = this.getYInc();
+            }catch{
+                yinc = this.getYInc();
+            }
             this.isDone();
             var yor = this.getYor();
             this.isDone();
