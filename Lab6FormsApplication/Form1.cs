@@ -15,15 +15,16 @@ namespace Lab6FormsApplication
 {
     public partial class Form1 : Form
     {
-        DMM dmm1 = new DMM(1);
-        DSO dso = new DSO(2);            //declares dso from dso class
-        List<float> dsodata;            //declares float list
+        DMM dmm1 = new DMM(1);      //declares dmm from dmm class
+        DSO dso = new DSO(2);       //declares dso from dso class
+        List<float> dsodata;        //declares float list
         NI.Device device;
 
         public Form1()
         {
             InitializeComponent();
 
+            //Make two grides, one for reistance and one for on time
             for (int i = 0; i < 100; i++)
             {
                 this.dataGridView1.Rows.Add(); //create table in the form
@@ -39,8 +40,8 @@ namespace Lab6FormsApplication
 
             for (int i = 0; i < 100; i++){
                 this.dataGridView2.Rows[i].Cells[0].Value = dmm1.measureResistance();//place resistance on chart
-                serialPort2.WriteLine("i");
-                Thread.Sleep(500); 
+                serialPort2.WriteLine("i"); //write 'i' to ZYBO to incriment the digital resitor
+                Thread.Sleep(500);   //wait .5 sec
              }
         }
 
@@ -48,61 +49,72 @@ namespace Lab6FormsApplication
         {
             for (int i = 0; i < 100; i++)
             {
-                this.dataGridView1.Rows[i].Cells[1].Value = getTime();
-                serialPort2.WriteLine("i");
-                Thread.Sleep(500);
+                this.dataGridView1.Rows[i].Cells[1].Value = getTime(); //get time form getTime function
+                serialPort2.WriteLine("i"); //increment digitage resistor
+                Thread.Sleep(500); //wait .5 sec
             }
         }
-        private float getTime()
+        //Get time function
+        private float getTime() 
         {
-            dso.clearOffset();
-            dso.setTimeScale(1.0f / (500.0f));
-            dso.setScale(20.0F);
-            dso.setTrigerSlopePos();
-            dso.setTrigerLevel(-0.3F);
-            dso.setCoupling(DSO.Coupling.DC);
-            dso.clearMeasure();
-            Thread.Sleep(500);
-            var data = dso.getdata();
-            data = data.Skip(data.Length / 2).ToArray();
-            var xinc = dso.getXInc();
-            var time = data.Where((d) => Math.Abs(d) < 1).ToArray().Length * xinc; //gets on time
+            dso.clearOffset();                   //clear offset
+            dso.setTimeScale(1.0f / (500.0f));   //set time scale
+            dso.setScale(20.0F);                 //set volts scale
+            dso.setTrigerSlopePos();            //set to trigger off positve slope of wavefrom
+            dso.setTrigerLevel(-0.3F);          //triggers off of level edge
+            dso.setCoupling(DSO.Coupling.DC);   //set coupling to DC
+            dso.clearMeasure();                 //clear measurements
+            Thread.Sleep(500);                  //wati .5 sec
+            var data = dso.getdata();          //var data set to getdata from DSO function
+            data = data.Skip(data.Length / 2).ToArray(); //skip the first half of data, send to another array called data
+            var xinc = 0F; 
+            try
+            {
+                xinc = dso.getXInc(); //get time between each x corridonate
+            }
+            catch
+            {
+                xinc = dso.getXInc();
+            }
+            dso.isDone();
+            //set d to abs, finds all values that are less than 1V,multiplies it by x increment, send to array time.
+            var time = data.Where((d) => Math.Abs(d) < 1).ToArray().Length * xinc; 
 
             return time;
         }
        
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            serialPort2.Close();
+            serialPort2.Close();  //close serial port two
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            serialPort2.Open();
+            serialPort2.Open(); //opends serial port two
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            serialPort2.WriteLine("d");
-            System.Windows.Forms.MessageBox.Show("Resitor Reseting!");
-            Thread.Sleep(12000); 
+            serialPort2.WriteLine("d"); //send 'd' to zybo to decrement resistor
+            System.Windows.Forms.MessageBox.Show("Resitor Reseting!"); //Message that the Resistor is reseting
+            Thread.Sleep(12000);  //wait 12 sec
         }
 
         private void uploadButton_Click(object sender, EventArgs e)
         {
-            var boardId = textBox2.Text;
-            char groupId = Convert.ToChar(textBox1.Text);
-            var cap = getCap();
+            var boardId = textBox2.Text;  //set board ID
+            char groupId = Convert.ToChar(textBox1.Text); //set group ID
+            var cap = getCap(); //get cap value
             /* Grab data from spreadsheet and place in lists */
             for (int i = 0; i < 100; i++)
             {
 
-                var onTime = Convert.ToSingle(dataGridView1.Rows[i].Cells[1].Value);
+                var onTime = Convert.ToSingle(dataGridView1.Rows[i].Cells[1].Value); //get onTime from grid
 
                 var res = new EET321_Lab6DataContext();
-                var data = new Table_1();
+                var data = new Table_1(); 
 
-
+                //Get proper information to get sent to server
                 data.GroupID = groupId;
                 data.BoardID = boardId;
                 data.DateTime = DateTime.Now;
@@ -112,9 +124,10 @@ namespace Lab6FormsApplication
 
                 res.Table_1s.InsertOnSubmit(data);//insert data to server
                 res.SubmitChanges(); //submit changes
-                
+
+                Thread.Sleep(100); //wait .1 sec
             }
-            System.Windows.Forms.MessageBox.Show("Upload complete!");
+            System.Windows.Forms.MessageBox.Show("Upload complete!"); //Message uplaod complete
         }
 
         private void uploadResistanceButton_Click(object sender, EventArgs e)
@@ -139,9 +152,9 @@ namespace Lab6FormsApplication
 
                 res.Table_Resistances.InsertOnSubmit(data);
                 res.SubmitChanges(); //submit changes
-                
+                Thread.Sleep(100);  //wait .1 sec
             }
-            System.Windows.Forms.MessageBox.Show("Upload complete!");
+            System.Windows.Forms.MessageBox.Show("Upload complete!"); //Message upload complete
         }
         private void uploadManual_Click(object sender, EventArgs e)
         {
@@ -150,7 +163,7 @@ namespace Lab6FormsApplication
 
             var res = new EET321_Lab6DataContext();
             var data = new Table_2();
-
+            //get information from textboxes
             data.GroupID = groupId;
             data.BoardID = boardId;
             data.DateTime = DateTime.Now;
@@ -161,10 +174,10 @@ namespace Lab6FormsApplication
            
             res.Table_2s.InsertOnSubmit(data);
             res.SubmitChanges(); //submit changes
-            System.Windows.Forms.MessageBox.Show("Upload complete!");
+            System.Windows.Forms.MessageBox.Show("Upload complete!"); //Message uplod is complete
         }
 
-
+        //Funtion to get the cap value
         private float getCap()
         {
             var capStr = capValue.Text;
@@ -307,39 +320,49 @@ namespace Lab6FormsApplication
         }
         public float getYInc()
         {
-            device.Write(":WAV:YINC?");
+            device.Write(":WAV:YINC?");     //get time between y increments
             string YINC = device.ReadString();
             return float.Parse(YINC);
         }
         public float getXInc()
         {
-            device.Write(":WAV:XINC?");
+            device.Write(":WAV:XINC?");    //get time between x increments
             string XINC = device.ReadString();
             return float.Parse(XINC);
         }
         public float getYor()
         {
-            device.Write(":WAV:YOR?");
+            device.Write(":WAV:YOR?");     //y orgin
             var YOR = device.ReadString();
             return float.Parse(YOR);
         }
         public float[] getdata()
         {
             string DATA = "";
+            try
+            {
             device.Write(":WAV:SCREENDATA?");
             do
             {
                 DATA += device.ReadString();
             } while (!Regex.IsMatch(DATA, @"\n"));
             DATA = DATA.Replace(" \n", "");
-            this.isDone();
+            }catch{
+                device.Write(":WAV:SCREENDATA?");
+                do
+                {
+                    DATA += device.ReadString();
+                } while (!Regex.IsMatch(DATA, @"\n"));
+                DATA = DATA.Replace(" \n", "");
+            }
+                this.isDone();
 
             string[] data_str = DATA.Split();
             var data_int = data_str.Select((s) => Convert.ToInt32(s, 16)).ToArray();
             var yinc = 0F;
             try
             {
-                yinc = this.getYInc();
+                yinc = this.getYInc(); //use catch just incase the command doesn't read the first time
             }catch{
                 yinc = this.getYInc();
             }

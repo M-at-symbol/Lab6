@@ -11,7 +11,7 @@
     <classShape Id="a0e10651-c7bc-4c9b-9f43-4e87435c5913" absoluteBounds="4.625, 1, 2, 1.9631982421875">
       <DataClassMoniker Name="/EET321_Lab6DataContext/Table_1" />
       <nestedChildShapes>
-        <elementListCompartment Id="751cb4bd-8220-4483-bfac-3bf1e52421bd" absoluteBounds="4.6400000000000006, 1.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="751cb4bd-8220-4483-bfac-3bf1e52421bd" absoluteBounds="4.64, 1.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="176e43bd-2795-43b0-8cba-507a0a27dc90" absoluteBounds="2.125, 1.375, 2, 1.5785953776041666">
